@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_detay.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_filmler.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/card_design_categori.xml" value="0.40260416666666665" />
+        <entry key="app/src/main/res/layout/film_card_tasarim.xml" value="0.31302083333333336" />
       </map>
     </option>
   </component>

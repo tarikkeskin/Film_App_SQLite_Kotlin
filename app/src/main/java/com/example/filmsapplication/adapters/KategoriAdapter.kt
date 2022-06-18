@@ -1,12 +1,14 @@
 package com.example.filmsapplication.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.filmsapplication.FilmlerActivity
 import com.example.filmsapplication.R
 import com.example.filmsapplication.entity.Kategoriler
 
@@ -33,8 +35,11 @@ class KategoriAdapter(private  val mContext:Context, private  val kategoriListe:
         val kategori = kategoriListe.get(position)
 
         holder.textViewKategoriAd.text = kategori.kategori_ad
-        holder.kategori_card.setOnClickListener {
 
+        holder.kategori_card.setOnClickListener {
+            val intent = Intent(mContext,FilmlerActivity::class.java)
+            intent.putExtra("kategoriNesne",kategori)
+            mContext.startActivity(intent)
         }
 
     }
