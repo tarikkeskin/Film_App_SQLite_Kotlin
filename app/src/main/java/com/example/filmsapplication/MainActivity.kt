@@ -4,17 +4,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmsapplication.adapters.KategoriAdapter
+import com.example.filmsapplication.dao.Kategorilerdao
 import com.example.filmsapplication.entity.Kategoriler
+import com.info.sqlitekullanimihazirveritabani.DatabaseCopyHelper
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var kategoriListe:ArrayList<Kategoriler>
     private lateinit var adapter:KategoriAdapter
 
+    private lateinit var vt:VeritabaniYardimcisi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        veritabaniKopyala()
 
         toolbarKategori.title = "Kategoriler"
         setSupportActionBar(toolbarKategori)
@@ -22,16 +29,23 @@ class MainActivity : AppCompatActivity() {
         kategoriRv.setHasFixedSize(true)
         kategoriRv.layoutManager = LinearLayoutManager(this)
 
-        kategoriListe = ArrayList()
+        vt = VeritabaniYardimcisi(this)
 
-        val k1 = Kategoriler(1,"Komedi")
-        val k2 = Kategoriler(2,"BilimKurgu")
-
-        kategoriListe.add(k1)
-        kategoriListe.add(k2)
+        kategoriListe = Kategorilerdao().tumKategoryler(vt)
 
         adapter = KategoriAdapter(this,kategoriListe)
 
         kategoriRv.adapter = adapter
+    }
+
+    fun veritabaniKopyala(){
+        val copyHelper = DatabaseCopyHelper(this)
+
+        try {
+            copyHelper.createDataBase()
+            copyHelper.openDataBase()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 }
